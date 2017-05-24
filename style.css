@@ -1,3 +1,60 @@
 body {
   font-family: 'Indie Flower', cursive;
+  background-color: rgb(179, 0, 0);
+  color: rgb(242, 242, 242);
+}
+
+.pizza-header {
+  text-align: center;
+  color: rgb(0,0,0);
+}
+
+.pizza-game {
+
+}
+
+.pizza-toppings-control-panel {
+  padding: 8px;
+  display: flex;
+}
+
+.pizza-toppings-control-panel-buttons {
+  display: inline;
+}
+
+.pizza-toppings-control-panel-buttons > button {
+  display: block;
+  width: 100px;
+  border-style: none;
+  margin-bottom: 4px;
+  background-color: rgb(200, 200, 200);
+}
+
+.pizza-toppings-control-panel-buttons > button:hover {
+  background-color: rgb(175, 175, 175);
+}
+
+.pizza-toppings-preview {
+  border: 1px solid black;
+  margin-left: 8px;
+  display: inline;
+  width: 128px;
+  height: 128px;
+}
+
+.pizza-footer {
+  text-align: center;
+  color: rgb(0, 0, 0);
+  margin-left: 16px;
+  margin-right: 16px;
+  border-top: 1px solid #dadada;
+}
+
+#app {
+  border: 1px solid rgb(128, 128, 128);
+  background-color: rgb(242, 242, 242);
+  height: 97vh;
+  width: 98vw;
+  margin: 4px;
+  overflow-y: scroll
 }
