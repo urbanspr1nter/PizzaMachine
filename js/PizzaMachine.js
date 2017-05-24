@@ -56,7 +56,7 @@ class PizzaMachine {
       case "Olives":
         this.currentPizza.push("i_4");
         break;
-      case "Mushrooms":
+      case "Mushroom":
         this.currentPizza.push("i_5");
         break;
       default:

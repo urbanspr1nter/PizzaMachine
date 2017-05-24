@@ -7,12 +7,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.pizzaMachine = new PizzaMachine();
+
     this.addIngredientToPizza = this.addIngredientToPizza.bind(this);
   }
 
   addIngredientToPizza(e) {
-    alert(`You chose ${e.target.dataset.ingredient}`);
-    console.log(e.target.dataset.ingredient);
+    this.pizzaMachine.addIngredientToPizza(e.target.dataset.ingredient);
   }
 
   render() {
