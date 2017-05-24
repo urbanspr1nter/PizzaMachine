@@ -26,7 +26,7 @@ class PizzaMachine {
 
     let finalTotalNumberFavored = this.totalNumberFavored;
     for(let i = 0; i < this.totalNumberFavored; i++) {
-      if(typeof this.favoredIngredients["i_" + i.toString()] !=== 'undefined') {
+      if(typeof this.favoredIngredients["i_" + i.toString()] !== 'undefined') {
         finalTotalNumberFavored--;
       }
       else {
@@ -35,6 +35,35 @@ class PizzaMachine {
     }
     this.totalNumberFavored = finalTotalNumberFavored;
 
+    this.currentPizza = [];
+
+  }
+
+  addIngredientToPizza(ingredient) {
+    switch(ingredient) {
+      case "Sauce":
+        this.currentPizza.push("i_0");
+        break;
+      case "Cheese":
+        this.currentPizza.push("i_1");
+        break;
+      case "Pepperoni":
+        this.currentPizza.push("i_2");
+        break;
+      case "Green Peppers":
+        this.currentPizza.push("i_3");
+        break;
+      case "Olives":
+        this.currentPizza.push("i_4");
+        break;
+      case "Mushrooms":
+        this.currentPizza.push("i_5");
+        break;
+      default:
+        break;
+    }
+
+    console.log(this.currentPizza);
   }
 
   getRandomInRange(min, max) {
