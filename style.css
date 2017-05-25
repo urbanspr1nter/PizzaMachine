@@ -7,10 +7,25 @@ body {
 .pizza-header {
   text-align: center;
   color: rgb(0,0,0);
+  display: flex;
+  margin: 0;
 }
 
-.pizza-game {
+.pizza-header > span > h1 {
+  display: inline-flex;
+  margin-top: 32px;
+}
 
+.pizza-header > span > img {
+  width: 128px;
+}
+
+.pizza-canvas {
+  width: 128px;
+  height: 128px;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .pizza-toppings-control-panel {
@@ -40,6 +55,12 @@ body {
   display: inline;
   width: 128px;
   height: 128px;
+}
+
+.pizza-toppings-preview > img {
+  margin: 0;
+  width: 128px;
+  position: absolute;
 }
 
 .pizza-footer {

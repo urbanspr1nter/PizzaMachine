@@ -9,14 +9,76 @@ class App extends React.Component {
 
     this.pizzaMachine = new PizzaMachine();
 
+    this.state = {
+      pizzaToppings: []
+    };
+
     this.addIngredientToPizza = this.addIngredientToPizza.bind(this);
   }
 
   addIngredientToPizza(e) {
-    this.pizzaMachine.addIngredientToPizza(e.target.dataset.ingredient);
+    let ingredientName = e.target.dataset.ingredient;
+
+    this.pizzaMachine.addIngredientToPizza(ingredientName);
+
+    let imageSrc = "../assets/crust.png";
+    let priority = 0;
+
+    switch(ingredientName) {
+      case "Sauce":
+        imageSrc = "../assets/sauce.png";
+        priority = 1;
+        break;
+      case "Cheese":
+        imageSrc = "../assets/cheese.png";
+        priority = 2;
+        break;
+      case "Pepperoni":
+        imageSrc = "../assets/pepperoni.png";
+        priority = 3;
+        break;
+      case "Green Peppers":
+        imageSrc = "../assets/green_peppers.png";
+        priority = 4;
+        break;
+      case "Olives":
+        imageSrc = "../assets/olives.png";
+        priority = 5;
+        break;
+      case "Mushroom":
+        imageSrc = "../assets/mushrooms.png";
+        priority = 6;
+        break;
+      default:
+        break;
+    }
+
+    this.setState({
+      pizzaToppings: [
+        {
+          imagePriority: priority,
+          imageElement: <img src={imageSrc} key={priority} />
+        }
+      ].concat(this.state.pizzaToppings).sort((a, b) => {
+        if(a.imagePriority < b.imagePriority) {
+          return -1;
+        }
+        else if(a.imagePriority > b.imagePriority) {
+          return 1;
+        }
+
+        return 0;
+      }),
+    });
+  }
+
+  componentWillUpdate() {
+
   }
 
   render() {
+    let i = 0;
+
     return (
       <div>
         <Header />
@@ -29,7 +91,14 @@ class App extends React.Component {
             <button data-ingredient="Olives" onClick={this.addIngredientToPizza} type="button">Olives</button>
             <button data-ingredient="Mushroom" onClick={this.addIngredientToPizza} type="button">Mushroom</button>
           </div>
-          <div className="pizza-toppings-preview"></div>
+          <div className="pizza-toppings-preview">
+            <img src="../assets/crust.png" />
+            {
+              this.state.pizzaToppings.map((t) => {
+                return t.imageElement;
+              })
+            }
+          </div>
         </div>
         <Footer />
       </div>

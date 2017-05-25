@@ -8,7 +8,12 @@ class Header extends React.Component {
   render() {
     return (
       <header className="pizza-header">
-        <h1>The Pizza Machine</h1>
+        <span>
+          <img src="../assets/pizza.png" />
+        </span>
+        <span>
+          <h1>The Pizza Machine</h1>
+        </span>
       </header>
     );
   }
