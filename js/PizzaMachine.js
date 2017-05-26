@@ -20,6 +20,7 @@ class PizzaMachine {
 
     this.getRandomInRange = this.getRandomInRange.bind(this);
     this.checkBuiltPizza = this.checkBuiltPizza.bind(this);
+    this.resetPizza = this.resetPizza.bind(this);
 
     this.totalNumberFavored = this.getRandomInRange(1, 6);
     this.favoredIngredients = {};
@@ -37,6 +38,10 @@ class PizzaMachine {
 
     this.currentPizza = [];
 
+  }
+
+  resetPizza() {
+    this.currentPizza = [];
   }
 
   addIngredientToPizza(ingredient) {

@@ -71,6 +71,34 @@ body {
   border-top: 1px solid #dadada;
 }
 
+.control-panel-spacer {
+  border-bottom: 2px solid rgb(128, 128, 128);
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.pizza-info {
+  border: 1px solid rgb(0, 0, 0);
+  margin-left: 32px;
+  margin-right: 32px;
+  margin-bottom: 32px;
+  padding: 8px;
+  color: rgb(96, 96, 96);
+  font-size: large;
+}
+
+.pizza-info-container {
+  display: flex;
+}
+
+.pizza-arnold-container {
+  margin-right: 16px;
+}
+
+.pizza-arnold-container > img {
+  width: 128px;
+}
+
 #app {
   border: 1px solid rgb(128, 128, 128);
   background-color: rgb(242, 242, 242);

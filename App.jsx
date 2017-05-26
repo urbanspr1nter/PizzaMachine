@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
+import Info from './components/Info.jsx';
 import PizzaMachine from './js/PizzaMachine.js';
 
 class App extends React.Component {
@@ -14,15 +15,30 @@ class App extends React.Component {
     };
 
     this.addIngredientToPizza = this.addIngredientToPizza.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+
+  reset() {
+    this.setState({
+      pizzaToppings: []
+    }, function() {
+      this.pizzaMachine.resetPizza();
+
+      let buttons = document.getElementsByClassName("pizza-topping-button");
+      for(let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = false;
+      }
+    });
   }
 
   addIngredientToPizza(e) {
     let ingredientName = e.target.dataset.ingredient;
+    let imageSrc = "../assets/crust.png";
+    let priority = 0;
 
     this.pizzaMachine.addIngredientToPizza(ingredientName);
 
-    let imageSrc = "../assets/crust.png";
-    let priority = 0;
+    e.target.disabled = true;
 
     switch(ingredientName) {
       case "Sauce":
@@ -79,17 +95,33 @@ class App extends React.Component {
   render() {
     let i = 0;
 
+    const infoContent = `
+      Hey, you! Arnold is hungry and wants you to make him a pizza.
+      He's going to be paying you really good money for it and so, he will be picky on what he wants on his pizza.
+      Make him a pizza which he loves and the money is all yours!
+
+      Just be careful! He's not going to give you many chances to get his order wrong.
+    `;
+
     return (
       <div>
         <Header />
+        <div className="pizza-info-container">
+          <Info content={infoContent} />
+          <div className="pizza-arnold-container">
+            <img src="../assets/arnold.jpg" />
+          </div>
+        </div>
         <div className="pizza-toppings-control-panel">
           <div className="pizza-toppings-control-panel-buttons">
-            <button data-ingredient="Sauce" onClick={this.addIngredientToPizza} type="button">Sauce</button>
-            <button data-ingredient="Cheese" onClick={this.addIngredientToPizza} type="button">Cheese</button>
-            <button data-ingredient="Pepperoni" onClick={this.addIngredientToPizza} type="button">Pepperoni</button>
-            <button data-ingredient="Green Peppers" onClick={this.addIngredientToPizza} type="button">Green Peppers</button>
-            <button data-ingredient="Olives" onClick={this.addIngredientToPizza} type="button">Olives</button>
-            <button data-ingredient="Mushroom" onClick={this.addIngredientToPizza} type="button">Mushroom</button>
+            <button className="pizza-topping-button" data-ingredient="Sauce" onClick={this.addIngredientToPizza} type="button">Sauce</button>
+            <button className="pizza-topping-button" data-ingredient="Cheese" onClick={this.addIngredientToPizza} type="button">Cheese</button>
+            <button className="pizza-topping-button" data-ingredient="Pepperoni" onClick={this.addIngredientToPizza} type="button">Pepperoni</button>
+            <button className="pizza-topping-button" data-ingredient="Green Peppers" onClick={this.addIngredientToPizza} type="button">Green Peppers</button>
+            <button className="pizza-topping-button" data-ingredient="Olives" onClick={this.addIngredientToPizza} type="button">Olives</button>
+            <button className="pizza-topping-button" data-ingredient="Mushroom" onClick={this.addIngredientToPizza} type="button">Mushroom</button>
+            <div className="control-panel-spacer" />
+            <button type="button" onClick={this.reset}>Reset</button>
           </div>
           <div className="pizza-toppings-preview">
             <img src="../assets/crust.png" />
