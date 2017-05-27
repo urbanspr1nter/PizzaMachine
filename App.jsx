@@ -11,11 +11,24 @@ class App extends React.Component {
     this.pizzaMachine = new PizzaMachine();
 
     this.state = {
-      pizzaToppings: []
+      pizzaToppings: [],
+      gameState: 'start',
+      info: ``
     };
 
     this.addIngredientToPizza = this.addIngredientToPizza.bind(this);
     this.reset = this.reset.bind(this);
+    this.getInfo = this.getInfo.bind(this);
+  }
+
+  componentDidMount() {
+    this.getInfo();
+  }
+
+  setGameState(gameState) {
+    this.setState({
+      gameState: gameState
+    });
   }
 
   reset() {
@@ -28,6 +41,41 @@ class App extends React.Component {
       for(let i = 0; i < buttons.length; i++) {
         buttons[i].disabled = false;
       }
+    });
+  }
+
+  getInfo() {
+    let info = ``;
+    switch(this.state.gameState) {
+      case 'more-toppings':
+        info = `
+          More toppings!!!
+        `;
+        break;
+      case 'yuck':
+        info = `
+          What is this?! I wanted a pizza, not garbage!
+        `;
+        break;
+      case 'perfect':
+        info = `
+          This! Now this, is a PIZZA! I will eat this delicious pizza and I'll be back!
+        `;
+        break;
+      default:
+        info = `
+          DIRECTIONS:
+          Hey, you! Arnold is hungry and wants you to make him a pizza.
+          He's going to be paying you really good money for it and so, he will be picky on what he wants on his pizza.
+          Make him a pizza which he loves and the money is all yours!
+
+          Just be careful! He's not going to give you many chances to get his order wrong.
+        `;
+        break;
+    }
+
+    this.setState({
+      info: info
     });
   }
 
@@ -95,19 +143,11 @@ class App extends React.Component {
   render() {
     let i = 0;
 
-    const infoContent = `
-      Hey, you! Arnold is hungry and wants you to make him a pizza.
-      He's going to be paying you really good money for it and so, he will be picky on what he wants on his pizza.
-      Make him a pizza which he loves and the money is all yours!
-
-      Just be careful! He's not going to give you many chances to get his order wrong.
-    `;
-
     return (
       <div>
         <Header />
         <div className="pizza-info-container">
-          <Info content={infoContent} />
+          <Info content={this.state.info} />
           <div className="pizza-arnold-container">
             <img src="../assets/arnold.jpg" />
           </div>
@@ -121,6 +161,7 @@ class App extends React.Component {
             <button className="pizza-topping-button" data-ingredient="Olives" onClick={this.addIngredientToPizza} type="button">Olives</button>
             <button className="pizza-topping-button" data-ingredient="Mushroom" onClick={this.addIngredientToPizza} type="button">Mushroom</button>
             <div className="control-panel-spacer" />
+            <button className="pizza-deliver-button" type="button" onClick={this.deliverPizza}>Deliver!</button>
             <button type="button" onClick={this.reset}>Reset</button>
           </div>
           <div className="pizza-toppings-preview">

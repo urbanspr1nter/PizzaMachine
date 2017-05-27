@@ -49,6 +49,16 @@ body {
   background-color: rgb(175, 175, 175);
 }
 
+button.pizza-deliver-button {
+  background-color: rgb(0, 192, 108);
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+
+button.pizza-deliver-button:hover {
+  background-color: rgb(0, 200, 114);
+}
+
 .pizza-toppings-preview {
   border: 1px solid black;
   margin-left: 8px;
