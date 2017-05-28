@@ -22,6 +22,7 @@ class App extends React.Component {
 
     this.addIngredientToPizza = this.addIngredientToPizza.bind(this);
     this.clearScoreBoard = this.clearScoreBoard.bind(this);
+    this.disableControls = this.disableControls.bind(this);
     this.reset = this.reset.bind(this);
     this.getInfo = this.getInfo.bind(this);
     this.setGameState = this.setGameState.bind(this);
@@ -48,6 +49,13 @@ class App extends React.Component {
   }
 
   deliverHandler() {
+    if(this.pizzaMachine.checkBuiltPizza(this.state.pizzaToppings) !== 'perfect' &&
+        (this.state.moreToppings.length >= 4 || this.state.badPizzas.length >= 10)) {
+      this.disableControls();
+      this.setGameState('game-over');
+      return;
+    }
+
     if(this.pizzaMachine.checkBuiltPizza(this.state.pizzaToppings) === 'yuck') {
       this.setState({
         badPizzas: this.state.badPizzas.concat([this.state.pizzaToppings])
@@ -65,24 +73,27 @@ class App extends React.Component {
       });
     }
     else {
-      let ingredientButtons = document.getElementsByClassName('pizza-topping-button');
-      let deliverButton = document.getElementsByClassName('pizza-deliver-button');
-      let resetButton = document.getElementsByClassName('pizza-reset-button');
-
-      Array.from(ingredientButtons).forEach((b) => {
-        b.disabled = true;
-      });
-
-      Array.from(deliverButton).forEach((b) => {
-        b.disabled = true;
-      });
-
-      Array.from(resetButton).forEach((b) => {
-        b.disabled = true;
-      });
-
+      this.disableControls();
       this.setGameState('perfect');
     }
+  }
+
+  disableControls() {
+    let ingredientButtons = document.getElementsByClassName('pizza-topping-button');
+    let deliverButton = document.getElementsByClassName('pizza-deliver-button');
+    let resetButton = document.getElementsByClassName('pizza-reset-button');
+
+    Array.from(ingredientButtons).forEach((b) => {
+      b.disabled = true;
+    });
+
+    Array.from(deliverButton).forEach((b) => {
+      b.disabled = true;
+    });
+
+    Array.from(resetButton).forEach((b) => {
+      b.disabled = true;
+    });
   }
 
   setGameState(gameState) {
@@ -137,14 +148,15 @@ class App extends React.Component {
           This! Now this, is a PIZZA! I will eat this delicious pizza and I'll be back!
         `;
         break;
+      case 'game-over':
+        info = `
+          You couldn't make the pizza I wanted! Game, OVER! Now you must go do push-ups with me at da GYM!!!!
+        `;
+        break;
       default:
         info = `
-          DIRECTIONS:
-          Hey, you! Arnold is hungry and wants you to make him a pizza.
-          He's going to be paying you really good money for it and so, he will be picky on what he wants on his pizza.
-          Make him a pizza which he loves and the money is all yours!
-
-          Just be careful! He's not going to give you many chances to get his order wrong.
+          Hey, you! I am Arnold and I am hungry!
+          Make me a pizza and I will pay you really good money for it, or else I will make you go to da gym!!!
         `;
         break;
     }

@@ -1,3 +1,9 @@
+/*
+  The Pizza Machine
+
+  Game logic that drives the "back-end" of the web game.
+*/
+
 export default class PizzaMachine {
   constructor() {
     /*
@@ -12,6 +18,10 @@ export default class PizzaMachine {
       "i_5": "Mushroom"
     };
 
+    /*
+      Keeps track of which ingredients are actually favored by the customer, so we can
+      check later.
+    */
     this.favoredMap = {
       "i_0": false,
       "i_1": false,
@@ -76,6 +86,9 @@ export default class PizzaMachine {
     this.totalNumberFavored = finalTotalNumberFavored;
   }
 
+  /*
+    Basically adds an ingredient to the current pizza that will be delivered.
+  */
   addIngredientToPizza(ingredient) {
     switch(ingredient) {
       case "Sauce":
@@ -101,6 +114,10 @@ export default class PizzaMachine {
     }
   }
 
+  /*
+    The logic that will check the pizza that is being delivered to the customer
+    and determines if it is the pizza in which the customer really wants.
+  */
   checkBuiltPizza() {
     let totalNumberFavoredInBuiltPizza = 0;
 

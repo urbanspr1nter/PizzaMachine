@@ -11,7 +11,7 @@ export default class ScoreBoard extends React.Component {
     return (
       <div className="pizza-scoreboard">
         <div className="pizza-delivered-container">
-          <div className="pizza-delivered-title">Bad Pizzas - {this.props.badPizzas.length}</div>
+          <div className="pizza-delivered-title">Bad Pizzas - {this.props.badPizzas.length} / 10</div>
           <div className="pizza-delivered-container">
             {
               this.props.badPizzas.map((b) => {
@@ -32,7 +32,7 @@ export default class ScoreBoard extends React.Component {
           </div>
         </div>
         <div className="pizza-delivered-container">
-          <div className="pizza-delivered-title">More Toppings - {this.props.moreToppings.length}</div>
+          <div className="pizza-delivered-title">More Toppings - {this.props.moreToppings.length} / 4</div>
           <div className="pizza-delivered-container">
             {
               this.props.moreToppings.map((m) => {
