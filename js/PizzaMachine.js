@@ -21,10 +21,17 @@ class PizzaMachine {
     this.getRandomInRange = this.getRandomInRange.bind(this);
     this.checkBuiltPizza = this.checkBuiltPizza.bind(this);
     this.resetPizza = this.resetPizza.bind(this);
+    this._init = this._init.bind(this);
 
     this.totalNumberFavored = this.getRandomInRange(1, 6);
     this.favoredIngredients = {};
 
+    this._init();
+
+    this.currentPizza = [];
+  }
+
+  _init() {
     let finalTotalNumberFavored = this.totalNumberFavored;
     for(let i = 0; i < this.totalNumberFavored; i++) {
       if(typeof this.favoredIngredients["i_" + i.toString()] !== 'undefined') {
@@ -35,9 +42,6 @@ class PizzaMachine {
       }
     }
     this.totalNumberFavored = finalTotalNumberFavored;
-
-    this.currentPizza = [];
-
   }
 
   resetPizza() {
@@ -67,16 +71,37 @@ class PizzaMachine {
       default:
         break;
     }
-
-    console.log(this.currentPizza);
   }
 
   getRandomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  checkBuiltPizza(builtPizza) {
-    return false;
+  checkBuiltPizza() {
+    let totalNumberFavoredInBuiltPizza = 0;
+    Array.from(this.currentPizza).forEach((ingredient) => {
+      console.log(ingredient);
+      if(typeof this.favoredIngredients[ingredient] !== true) {
+        totalNumberFavoredInBuiltPizza += 1;
+      }
+      else {
+        return 'yuck';
+      }
+    });
+
+    console.log("FAVORED", this.totalNumberFavored);
+    console.log("BUILT", totalNumberFavoredInBuiltPizza);
+
+
+    if(totalNumberFavoredInBuiltPizza === this.totalNumberFavored) {
+      return 'perfect';
+    }
+    else if(totalNumberFavoredInBuiltPizza < this.totalNumberFavored) {
+      return 'more-toppings';
+    }
+    else {
+      return 'yuck';
+    }
   }
 
 };

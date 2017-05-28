@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import Info from './components/Info.jsx';
+import ControlPanel from './components/ControlPanel.jsx';
 import PizzaMachine from './js/PizzaMachine.js';
 
 class App extends React.Component {
@@ -19,15 +20,32 @@ class App extends React.Component {
     this.addIngredientToPizza = this.addIngredientToPizza.bind(this);
     this.reset = this.reset.bind(this);
     this.getInfo = this.getInfo.bind(this);
+    this.setGameState = this.setGameState.bind(this);
+    this.deliverHandler = this.deliverHandler.bind(this);
   }
 
   componentDidMount() {
     this.getInfo();
   }
 
+  deliverHandler() {
+    console.log("HI");
+    if(this.pizzaMachine.checkBuiltPizza(this.state.pizzaToppings) === 'yuck') {
+      this.setGameState('yuck');
+    }
+    else if(this.pizzaMachine.checkBuiltPizza(this.state.pizzaToppings) === 'more-toppings') {
+      this.setGameState('more-toppings');
+    }
+    else {
+      this.setGameState('perfect');
+    }
+  }
+
   setGameState(gameState) {
     this.setState({
       gameState: gameState
+    }, function() {
+      this.getInfo();
     });
   }
 
@@ -136,10 +154,6 @@ class App extends React.Component {
     });
   }
 
-  componentWillUpdate() {
-
-  }
-
   render() {
     let i = 0;
 
@@ -152,27 +166,12 @@ class App extends React.Component {
             <img src="../assets/arnold.jpg" />
           </div>
         </div>
-        <div className="pizza-toppings-control-panel">
-          <div className="pizza-toppings-control-panel-buttons">
-            <button className="pizza-topping-button" data-ingredient="Sauce" onClick={this.addIngredientToPizza} type="button">Sauce</button>
-            <button className="pizza-topping-button" data-ingredient="Cheese" onClick={this.addIngredientToPizza} type="button">Cheese</button>
-            <button className="pizza-topping-button" data-ingredient="Pepperoni" onClick={this.addIngredientToPizza} type="button">Pepperoni</button>
-            <button className="pizza-topping-button" data-ingredient="Green Peppers" onClick={this.addIngredientToPizza} type="button">Green Peppers</button>
-            <button className="pizza-topping-button" data-ingredient="Olives" onClick={this.addIngredientToPizza} type="button">Olives</button>
-            <button className="pizza-topping-button" data-ingredient="Mushroom" onClick={this.addIngredientToPizza} type="button">Mushroom</button>
-            <div className="control-panel-spacer" />
-            <button className="pizza-deliver-button" type="button" onClick={this.deliverPizza}>Deliver!</button>
-            <button type="button" onClick={this.reset}>Reset</button>
-          </div>
-          <div className="pizza-toppings-preview">
-            <img src="../assets/crust.png" />
-            {
-              this.state.pizzaToppings.map((t) => {
-                return t.imageElement;
-              })
-            }
-          </div>
-        </div>
+        <ControlPanel
+          addIngredientHandler={this.addIngredientToPizza}
+          deliverHandler={this.deliverHandler}
+          resetHandler={this.reset}
+          pizzaToppings={this.state.pizzaToppings} />
+
         <Footer />
       </div>
     );
