@@ -21,11 +21,19 @@ class App extends React.Component {
     };
 
     this.addIngredientToPizza = this.addIngredientToPizza.bind(this);
+    this.clearScoreBoard = this.clearScoreBoard.bind(this);
     this.reset = this.reset.bind(this);
     this.getInfo = this.getInfo.bind(this);
     this.setGameState = this.setGameState.bind(this);
     this.deliverHandler = this.deliverHandler.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
+  }
+
+  clearScoreBoard() {
+    this.setState({
+      badPizzas: [],
+      moreToppings: []
+    });
   }
 
   componentDidMount() {
@@ -36,6 +44,7 @@ class App extends React.Component {
     this.reset();
     this.pizzaMachine = new PizzaMachine();
     this.setGameState('');
+    this.clearScoreBoard();
   }
 
   deliverHandler() {
@@ -90,10 +99,23 @@ class App extends React.Component {
     }, function() {
       this.pizzaMachine.resetPizza();
 
-      let buttons = document.getElementsByClassName("pizza-topping-button");
-      for(let i = 0; i < buttons.length; i++) {
-        buttons[i].disabled = false;
-      }
+      let ingredientButtons = document.getElementsByClassName("pizza-topping-button");
+      let deliverButtons = document.getElementsByClassName('pizza-deliver-button');
+      let resetButtons = document.getElementsByClassName('pizza-reset-button');
+
+      Array.from(ingredientButtons).forEach((b) => {
+        b.disabled = false;
+      });
+
+      Array.from(deliverButtons).forEach((b) => {
+        b.disabled = false;
+      });
+
+      Array.from(resetButtons).forEach((b) => {
+        b.disabled = false;
+      });
+
+
     });
   }
 

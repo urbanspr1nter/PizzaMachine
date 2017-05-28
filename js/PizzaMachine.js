@@ -70,6 +70,7 @@ export default class PizzaMachine {
       }
       else {
         this.favoredIngredients["i_" + i.toString()] = this.ingredientMap["i_" + i.toString()];
+        this.favoredMap["i_" + i.toString()] = true;
       }
     }
     this.totalNumberFavored = finalTotalNumberFavored;
@@ -105,7 +106,7 @@ export default class PizzaMachine {
 
     Array.from(this.currentPizza).forEach((ingredient) => {
       console.log(ingredient);
-      if(typeof this.favoredIngredients[ingredient] !== true) {
+      if(typeof this.favoredMap[ingredient] !== false) {
         totalNumberFavoredInBuiltPizza += 1;
       }
       else {
