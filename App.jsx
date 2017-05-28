@@ -168,7 +168,7 @@ class App extends React.Component {
 
   addIngredientToPizza(e) {
     let ingredientName = e.target.dataset.ingredient;
-    let imageSrc = "../assets/crust.png";
+    let imageSrc = "assets/crust.png";
     let priority = 0;
 
     this.pizzaMachine.addIngredientToPizza(ingredientName);
@@ -177,27 +177,27 @@ class App extends React.Component {
 
     switch(ingredientName) {
       case "Sauce":
-        imageSrc = "../assets/sauce.png";
+        imageSrc = "assets/sauce.png";
         priority = 1;
         break;
       case "Cheese":
-        imageSrc = "../assets/cheese.png";
+        imageSrc = "assets/cheese.png";
         priority = 2;
         break;
       case "Pepperoni":
-        imageSrc = "../assets/pepperoni.png";
+        imageSrc = "assets/pepperoni.png";
         priority = 3;
         break;
       case "Green Peppers":
-        imageSrc = "../assets/green_peppers.png";
+        imageSrc = "assets/green_peppers.png";
         priority = 4;
         break;
       case "Olives":
-        imageSrc = "../assets/olives.png";
+        imageSrc = "assets/olives.png";
         priority = 5;
         break;
       case "Mushroom":
-        imageSrc = "../assets/mushrooms.png";
+        imageSrc = "assets/mushrooms.png";
         priority = 6;
         break;
       default:
@@ -232,7 +232,7 @@ class App extends React.Component {
         <div className="pizza-info-container">
           <Info content={this.state.info} />
           <div className="pizza-arnold-container">
-            <img src="../assets/arnold.jpg" />
+            <img src="assets/arnold.jpg" />
           </div>
         </div>
         <button className="pizza-button-new-game" onClick={this.startNewGame} type="button">NEW GAME</button>

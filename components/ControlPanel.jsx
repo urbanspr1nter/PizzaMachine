@@ -20,7 +20,7 @@ export default class ControlPanel extends React.Component {
           <button className="pizza-reset-button" type="button" onClick={this.props.resetHandler}>Reset</button>
         </div>
         <div className="pizza-toppings-preview">
-          <img src="../assets/crust.png" />
+          <img src="assets/crust.png" />
           {
             this.props.pizzaToppings.map((t) => {
               return t.imageElement;

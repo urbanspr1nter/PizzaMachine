@@ -17,7 +17,7 @@ export default class ScoreBoard extends React.Component {
               this.props.badPizzas.map((b) => {
                 return (
                   <div className="delivered-pizza" key={i += 1}>
-                    <img src="../assets/crust.png" />
+                    <img src="assets/crust.png" />
                     {
                       b.map((el) => {
                         return (
