@@ -22,19 +22,27 @@ class App extends React.Component {
     this.getInfo = this.getInfo.bind(this);
     this.setGameState = this.setGameState.bind(this);
     this.deliverHandler = this.deliverHandler.bind(this);
+    this.startNewGame = this.startNewGame.bind(this);
   }
 
   componentDidMount() {
     this.getInfo();
   }
 
+  startNewGame() {
+    this.reset();
+    this.pizzaMachine = new PizzaMachine();
+    this.setGameState('');
+  }
+
   deliverHandler() {
-    console.log("HI");
     if(this.pizzaMachine.checkBuiltPizza(this.state.pizzaToppings) === 'yuck') {
       this.setGameState('yuck');
+      this.reset();
     }
     else if(this.pizzaMachine.checkBuiltPizza(this.state.pizzaToppings) === 'more-toppings') {
       this.setGameState('more-toppings');
+      this.reset();
     }
     else {
       this.setGameState('perfect');
@@ -166,6 +174,7 @@ class App extends React.Component {
             <img src="../assets/arnold.jpg" />
           </div>
         </div>
+        <button className="pizza-button-new-game" onClick={this.startNewGame} type="button">NEW GAME</button>
         <ControlPanel
           addIngredientHandler={this.addIngredientToPizza}
           deliverHandler={this.deliverHandler}

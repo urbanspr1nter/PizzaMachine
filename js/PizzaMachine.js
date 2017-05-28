@@ -29,6 +29,9 @@ class PizzaMachine {
     this._init();
 
     this.currentPizza = [];
+
+    this.numberOfBadPizzas = 0;
+    this.numberOfImperfectPizzas = 0;
   }
 
   _init() {
@@ -79,27 +82,27 @@ class PizzaMachine {
 
   checkBuiltPizza() {
     let totalNumberFavoredInBuiltPizza = 0;
+
     Array.from(this.currentPizza).forEach((ingredient) => {
       console.log(ingredient);
       if(typeof this.favoredIngredients[ingredient] !== true) {
         totalNumberFavoredInBuiltPizza += 1;
       }
       else {
+        this.numberOfBadPizzas += 1;
         return 'yuck';
       }
     });
-
-    console.log("FAVORED", this.totalNumberFavored);
-    console.log("BUILT", totalNumberFavoredInBuiltPizza);
-
 
     if(totalNumberFavoredInBuiltPizza === this.totalNumberFavored) {
       return 'perfect';
     }
     else if(totalNumberFavoredInBuiltPizza < this.totalNumberFavored) {
+      this.numberOfImperfectPizzas += 1;
       return 'more-toppings';
     }
     else {
+      this.numberOfBadPizzas += 1;
       return 'yuck';
     }
   }
