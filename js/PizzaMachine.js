@@ -1,5 +1,8 @@
-class PizzaMachine {
+export default class PizzaMachine {
   constructor() {
+    /*
+      The map of ingredients. The key is the code, the value is the ingredient name.
+    */
     this.ingredientMap = {
       "i_0": "Sauce",
       "i_1": "Cheese",
@@ -18,24 +21,49 @@ class PizzaMachine {
       "i_5": false
     };
 
-    this.getRandomInRange = this.getRandomInRange.bind(this);
+    /*
+      Bind this instance to the functions.
+    */
+    this.addIngredientToPizza = this.addIngredientToPizza.bind(this);
     this.checkBuiltPizza = this.checkBuiltPizza.bind(this);
     this.resetPizza = this.resetPizza.bind(this);
     this._init = this._init.bind(this);
 
+    /*
+      Get the total number of favored ingredients.
+
+      This will change based on the random ingredients picked out in the _init
+      routine.
+    */
     this.totalNumberFavored = this.getRandomInRange(1, 6);
+
+    /*
+      Stores the favored ingredients.
+    */
     this.favoredIngredients = {};
 
     this._init();
 
     this.currentPizza = [];
 
+    /*
+      Keeps track of the number of bad pizzas
+    */
     this.numberOfBadPizzas = 0;
+
+    /*
+      Keeps track of the number of imperfect pizzas
+    */
     this.numberOfImperfectPizzas = 0;
   }
 
+  /**
+    The initialization routine to figure out the true total number of favored toppings
+    for what the customer wants.
+   */
   _init() {
     let finalTotalNumberFavored = this.totalNumberFavored;
+
     for(let i = 0; i < this.totalNumberFavored; i++) {
       if(typeof this.favoredIngredients["i_" + i.toString()] !== 'undefined') {
         finalTotalNumberFavored--;
@@ -45,10 +73,6 @@ class PizzaMachine {
       }
     }
     this.totalNumberFavored = finalTotalNumberFavored;
-  }
-
-  resetPizza() {
-    this.currentPizza = [];
   }
 
   addIngredientToPizza(ingredient) {
@@ -74,10 +98,6 @@ class PizzaMachine {
       default:
         break;
     }
-  }
-
-  getRandomInRange(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   checkBuiltPizza() {
@@ -107,6 +127,17 @@ class PizzaMachine {
     }
   }
 
-};
+  /*
+    A utility method to get a random number in the range of [min, max] (inclusive).
+  */
+  getRandomInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
-export default PizzaMachine;
+  /*
+    Resets the current pizza being assembled.
+  */
+  resetPizza() {
+    this.currentPizza = [];
+  }
+}
