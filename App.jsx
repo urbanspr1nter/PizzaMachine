@@ -4,6 +4,7 @@ import Footer from './components/Footer.jsx';
 import Info from './components/Info.jsx';
 import ControlPanel from './components/ControlPanel.jsx';
 import PizzaMachine from './js/PizzaMachine.js';
+import ScoreBoard from './components/ScoreBoard.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,7 +15,9 @@ class App extends React.Component {
     this.state = {
       pizzaToppings: [],
       gameState: 'start',
-      info: ``
+      info: ``,
+      badPizzas: [],
+      moreToppings: []
     };
 
     this.addIngredientToPizza = this.addIngredientToPizza.bind(this);
@@ -37,16 +40,28 @@ class App extends React.Component {
 
   deliverHandler() {
     if(this.pizzaMachine.checkBuiltPizza(this.state.pizzaToppings) === 'yuck') {
-      this.setGameState('yuck');
-      this.reset();
+      this.setState({
+        badPizzas: this.state.badPizzas.concat([this.state.pizzaToppings])
+      }, function() {
+        this.setGameState('yuck');
+        this.reset();
+      });
     }
     else if(this.pizzaMachine.checkBuiltPizza(this.state.pizzaToppings) === 'more-toppings') {
-      this.setGameState('more-toppings');
-      this.reset();
+      this.setState({
+        moreToppings: this.state.moreToppings.concat([this.state.pizzaToppings])
+      }, function() {
+        this.setGameState('more-toppings');
+        this.reset();
+      });
     }
     else {
       this.setGameState('perfect');
     }
+
+    console.log("BAD PIZZAS", this.state.badPizzas);
+    console.log("MORE TOPPINGS", this.state.moreToppings);
+    console.log("BUILT", this.state.pizzaToppings);
   }
 
   setGameState(gameState) {
@@ -175,12 +190,14 @@ class App extends React.Component {
           </div>
         </div>
         <button className="pizza-button-new-game" onClick={this.startNewGame} type="button">NEW GAME</button>
-        <ControlPanel
-          addIngredientHandler={this.addIngredientToPizza}
-          deliverHandler={this.deliverHandler}
-          resetHandler={this.reset}
-          pizzaToppings={this.state.pizzaToppings} />
-
+        <div className="pizza-game-container">
+          <ControlPanel
+            addIngredientHandler={this.addIngredientToPizza}
+            deliverHandler={this.deliverHandler}
+            resetHandler={this.reset}
+            pizzaToppings={this.state.pizzaToppings} />
+          <ScoreBoard badPizzas={this.state.badPizzas} moreToppings={this.state.moreToppings} />
+        </div>
         <Footer />
       </div>
     );
