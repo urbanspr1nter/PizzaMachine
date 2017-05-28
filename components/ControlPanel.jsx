@@ -17,7 +17,7 @@ export default class ControlPanel extends React.Component {
           <button className="pizza-topping-button" data-ingredient="Mushroom" onClick={this.props.addIngredientHandler} type="button">Mushroom</button>
           <div className="control-panel-spacer" />
           <button className="pizza-deliver-button" type="button" onClick={this.props.deliverHandler}>Deliver!</button>
-          <button type="button" onClick={this.props.resetHandler}>Reset</button>
+          <button className="pizza-reset-button" type="button" onClick={this.props.resetHandler}>Reset</button>
         </div>
         <div className="pizza-toppings-preview">
           <img src="../assets/crust.png" />

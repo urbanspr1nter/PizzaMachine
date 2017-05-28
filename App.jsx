@@ -56,12 +56,24 @@ class App extends React.Component {
       });
     }
     else {
+      let ingredientButtons = document.getElementsByClassName('pizza-topping-button');
+      let deliverButton = document.getElementsByClassName('pizza-deliver-button');
+      let resetButton = document.getElementsByClassName('pizza-reset-button');
+
+      Array.from(ingredientButtons).forEach((b) => {
+        b.disabled = true;
+      });
+
+      Array.from(deliverButton).forEach((b) => {
+        b.disabled = true;
+      });
+
+      Array.from(resetButton).forEach((b) => {
+        b.disabled = true;
+      });
+
       this.setGameState('perfect');
     }
-
-    console.log("BAD PIZZAS", this.state.badPizzas);
-    console.log("MORE TOPPINGS", this.state.moreToppings);
-    console.log("BUILT", this.state.pizzaToppings);
   }
 
   setGameState(gameState) {
