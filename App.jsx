@@ -228,23 +228,41 @@ class App extends React.Component {
 
     return (
       <div>
-        <Header />
-        <div className="pizza-info-container">
-          <Info content={this.state.info} />
-          <div className="pizza-arnold-container">
-            <img src="assets/arnold.jpg" />
+        <div className='grid'>
+          <div className='col-12'>
+            <Header />
           </div>
         </div>
-        <button className="pizza-button-new-game" onClick={this.startNewGame} type="button">NEW GAME</button>
-        <div className="pizza-game-container">
-          <ControlPanel
-            addIngredientHandler={this.addIngredientToPizza}
-            deliverHandler={this.deliverHandler}
-            resetHandler={this.reset}
-            pizzaToppings={this.state.pizzaToppings} />
-          <ScoreBoard badPizzas={this.state.badPizzas} moreToppings={this.state.moreToppings} />
+        <div className='grid'>
+          <div className='col-10'>
+            <Info content={this.state.info} />
+          </div>
+          <div className='col-2'>
+            <img className="pizza-arnold-image" src="assets/arnold.jpg" />
+          </div>
         </div>
-        <Footer />
+        <div className='grid'>
+          <div className='col-12'>
+            <button className="pizza-button-new-game" onClick={this.startNewGame} type="button">NEW GAME</button>
+          </div>
+        </div>
+        <div className='grid'>
+          <div className='col-3'>
+            <ControlPanel
+              addIngredientHandler={this.addIngredientToPizza}
+              deliverHandler={this.deliverHandler}
+              resetHandler={this.reset}
+              pizzaToppings={this.state.pizzaToppings} />
+          </div>
+          <div className='col-9'>
+            <ScoreBoard badPizzas={this.state.badPizzas} moreToppings={this.state.moreToppings} />
+          </div>
+        </div>
+        <div className='grid'>
+          <div className='col-12'>
+            <Footer />
+          </div>
+        </div>
       </div>
     );
   }

@@ -31,10 +31,14 @@
     "jest": "^20.0.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "sass": "^0.5.0",
     "webpack": "^2.5.1",
     "webpack-dev-server": "^2.4.5"
   },
   "babel": {
-    "presets": ["es2015", "react"]
+    "presets": [
+      "es2015",
+      "react"
+    ]
   }
 }

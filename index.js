@@ -9782,33 +9782,69 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Header2.default, null),
         _react2.default.createElement(
           'div',
-          { className: 'pizza-info-container' },
-          _react2.default.createElement(_Info2.default, { content: this.state.info }),
+          { className: 'grid' },
           _react2.default.createElement(
             'div',
-            { className: 'pizza-arnold-container' },
-            _react2.default.createElement('img', { src: 'assets/arnold.jpg' })
+            { className: 'col-12' },
+            _react2.default.createElement(_Header2.default, null)
           )
         ),
         _react2.default.createElement(
-          'button',
-          { className: 'pizza-button-new-game', onClick: this.startNewGame, type: 'button' },
-          'NEW GAME'
+          'div',
+          { className: 'grid' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-10' },
+            _react2.default.createElement(_Info2.default, { content: this.state.info })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-2' },
+            _react2.default.createElement('img', { className: 'pizza-arnold-image', src: 'assets/arnold.jpg' })
+          )
         ),
         _react2.default.createElement(
           'div',
-          { className: 'pizza-game-container' },
-          _react2.default.createElement(_ControlPanel2.default, {
-            addIngredientHandler: this.addIngredientToPizza,
-            deliverHandler: this.deliverHandler,
-            resetHandler: this.reset,
-            pizzaToppings: this.state.pizzaToppings }),
-          _react2.default.createElement(_ScoreBoard2.default, { badPizzas: this.state.badPizzas, moreToppings: this.state.moreToppings })
+          { className: 'grid' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-12' },
+            _react2.default.createElement(
+              'button',
+              { className: 'pizza-button-new-game', onClick: this.startNewGame, type: 'button' },
+              'NEW GAME'
+            )
+          )
         ),
-        _react2.default.createElement(_Footer2.default, null)
+        _react2.default.createElement(
+          'div',
+          { className: 'grid' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-3' },
+            _react2.default.createElement(_ControlPanel2.default, {
+              addIngredientHandler: this.addIngredientToPizza,
+              deliverHandler: this.deliverHandler,
+              resetHandler: this.reset,
+              pizzaToppings: this.state.pizzaToppings })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-9' },
+            _react2.default.createElement(_ScoreBoard2.default, { badPizzas: this.state.badPizzas, moreToppings: this.state.moreToppings })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'grid' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-12' },
+            _react2.default.createElement(_Footer2.default, null)
+          )
+        )
       );
     }
   }]);
