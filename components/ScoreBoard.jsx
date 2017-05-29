@@ -38,7 +38,7 @@ export default class ScoreBoard extends React.Component {
               this.props.moreToppings.map((m) => {
                 return (
                   <div className="delivered-pizza" key = {i += 1}>
-                    <img src="../assets/crust.png" />
+                    <img src="assets/crust.png" />
                     {
                       m.map((el) => {
                         return (
